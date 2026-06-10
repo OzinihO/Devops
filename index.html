@@ -2,85 +2,97 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Senior DevOps & Azure Architecture Assessment</title>
+<title>DevOps Architecture Assessment</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 body {
-  background: #0b0e14;
+  background: radial-gradient(circle at top, #0b1220, #05070d);
   color: #e5e7eb;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui;
+}
+
+.glass {
+  background: rgba(30,41,59,0.6);
+  border: 1px solid rgba(148,163,184,0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
 }
 
 .card {
-  background: rgba(30,41,59,0.85);
+  background: rgba(15,23,42,0.7);
   border: 1px solid #334155;
   border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 20px;
-}
-
-.section-title {
-  color: #38bdf8;
-  font-size: 22px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #334155;
-  padding-bottom: 5px;
-}
-
-button.submit-btn {
-  width: 100%;
-  padding: 14px;
-  background: #2563eb;
-  border-radius: 10px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: white;
-  transition: background 0.2s;
-}
-
-button.submit-btn:hover {
-  background: #1d4ed8;
+  padding: 16px;
 }
 
 textarea {
   width: 100%;
-  height: 100px;
-  margin-top: 10px;
-  background: #0f172a;
+  height: 80px;
+  margin-top: 8px;
+  background: #0b1220;
   border: 1px solid #334155;
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
-  resize: vertical;
+  outline: none;
 }
 
-label {
-  display: block;
-  margin-top: 8px;
-  cursor: pointer;
+textarea:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56,189,248,0.2);
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border-radius: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.01);
 }
 
 #timer {
   position: fixed;
-  top: 12px;
-  right: 12px;
-  background: #1f2937;
-  padding: 10px 14px;
-  border-radius: 10px;
+  top: 14px;
+  right: 14px;
+  background: rgba(30,41,59,0.9);
+  padding: 12px 16px;
+  border-radius: 12px;
   border: 1px solid #334155;
   font-weight: bold;
-  z-index: 50;
+  color: #38bdf8;
 }
 
-.result-box {
-  background: #1e293b;
-  border: 1px solid #10b981;
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;
-  display: none;
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(90deg,#38bdf8,#60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+img {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 14px;
+  border: 1px solid #334155;
 }
 </style>
 </head>
@@ -89,116 +101,156 @@ label {
 
 <div id="timer">60:00</div>
 
-<div style="max-width:900px; margin:auto; padding:20px; padding-bottom: 100px;">
+<div style="max-width:1000px;margin:auto;padding:24px">
 
-  <h1 style="color:#38bdf8; font-size:32px; font-weight: bold;">DevOps Architecture Assessment</h1>
-  <p style="color:#94a3b8; font-size:16px;">Advanced Azure Infrastructure & Production Scenarios – 60 Minutes</p>
-
-  <div class="section-title">Part 1: Architecture & Infrastructure (MCQ)</div>
-  <p style="color:#64748b; font-size:14px; margin-bottom: 15px;">Choose the single best answer. (1 point each)</p>
-
-  <div id="mcq-container">
-    <div class="card">
-      <h3>1. [Question about Azure Networking/AKS will go here]</h3>
-      <label><input type="radio" name="q1" value="0"> Option A</label>
-      <label><input type="radio" name="q1" value="1"> Option B (Correct)</label>
-      <label><input type="radio" name="q1" value="0"> Option C</label>
-      <label><input type="radio" name="q1" value="0"> Option D</label>
-    </div>
-    </div>
-
-  <div class="section-title">Part 2: Production Scenarios & Troubleshooting</div>
-  <p style="color:#64748b; font-size:14px; margin-bottom: 15px;">Detail your debugging approach and reasoning. (3 points each, manual grading)</p>
-
-  <div id="scenario-container">
-    <div class="card">
-      <h3>8. [Scenario: AKS Pods failing or Pipeline failure]</h3>
-      <p style="color:#cbd5e1; font-size:14px;">Describe your step-by-step troubleshooting process.</p>
-      <textarea id="q8" placeholder="Write your analysis here..."></textarea>
-    </div>
-    </div>
-
-  <div class="section-title">Part 3: Leadership & Design Thinking</div>
-  <p style="color:#64748b; font-size:14px; margin-bottom: 15px;">Focus on trade-offs, stability vs speed, and cross-team communication. (5 points each, manual grading)</p>
-
-  <div id="leadership-container">
-    <div class="card">
-      <h3>13. [Design trade-off / Incident Management question]</h3>
-      <p style="color:#cbd5e1; font-size:14px;">Explain your architectural decision or leadership approach.</p>
-      <textarea id="q13" placeholder="Write your response here..."></textarea>
-    </div>
-    </div>
-
-  <button class="submit-btn" onclick="submitTest()">Submit Full Assessment</button>
-
-  <div id="result" class="result-box">
-    <h2 style="color:#10b981; font-size: 24px; margin-bottom: 10px;">Assessment Submitted</h2>
-    <div id="score-details" style="font-size: 18px;"></div>
-    <p style="color:#94a3b8; font-size:14px; margin-top:10px;">* Note: The final level (Junior to Lead) requires manual grading of Part 2 and Part 3.</p>
+<!-- HEADER -->
+<div class="header glass p-6 mb-6">
+  <h1>DevOps Architecture Assessment</h1>
+  <div class="subtitle">
+    Azure • AKS • Terraform • Security • SRE • Leadership
   </div>
+</div>
+
+<!-- UPLOAD -->
+<div class="glass p-6 mb-6">
+  <h2 class="text-xl font-semibold text-sky-400">Architecture Input</h2>
+  <p class="text-slate-400 text-sm mt-1">Upload system architecture image for analysis</p>
+
+  <input type="file" accept="image/*" onchange="loadImage(event)" class="mt-4">
+
+  <img id="archImg" style="display:none;">
+</div>
+
+<!-- QUESTIONS -->
+<div class="grid gap-4">
+
+<div class="card">
+<b>1. System Overview</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>2. Identify main components in the architecture</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>3. What are the security risks in this design?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>4. Explain traffic flow between services</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>5. How is identity and access managed?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>6. How would you improve scalability?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>7. CI/CD pipeline design and flow</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>8. Observability strategy (logs/metrics/tracing)</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>9. Biggest architectural risks?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>10. How would you handle production outage?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>11. AKS pods restart continuously — what do you check?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>12. Terraform state corruption — mitigation strategy?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>13. Key Vault access denied — troubleshooting steps?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>14. Latency between services — root cause analysis?</b>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<b>15. Leadership: Dev wants risky release before production — what do you do?</b>
+<textarea></textarea>
+</div>
+
+</div>
+
+<button onclick="submitTest()">Submit Assessment</button>
+
+<div id="result" class="text-center mt-6 text-xl"></div>
 
 </div>
 
 <script>
-// TIMER LOGIC
-let time = 60 * 60; // 60 minutes
-let timerInterval = setInterval(() => {
+
+// TIMER
+let time = 60 * 60;
+
+setInterval(() => {
   let m = Math.floor(time / 60);
   let s = time % 60;
-  document.getElementById("timer").innerText = m + ":" + (s < 10 ? "0" : "") + s;
+
+  document.getElementById("timer").innerText =
+    m + ":" + (s < 10 ? "0" : "") + s;
+
   time--;
-  if (time < 0) {
-    clearInterval(timerInterval);
-    submitTest();
-  }
+
+  if (time < 0) submitTest();
 }, 1000);
 
-// SCORING LOGIC
+// IMAGE
+function loadImage(event) {
+  const img = document.getElementById("archImg");
+  img.src = URL.createObjectURL(event.target.files[0]);
+  img.style.display = "block";
+}
+
+// SUBMIT
 function submitTest() {
-  clearInterval(timerInterval); // Stop timer
-  
-  let mcqScore = 0;
-  
-  // Calculate MCQ (Questions 1 to 7) - 1 point each
-  for (let i = 1; i <= 7; i++) {
-    let radios = document.getElementsByName("q" + i);
-    if(radios) {
-      radios.forEach(r => {
-        if (r.checked) mcqScore += parseInt(r.value);
-      });
-    }
-  }
+  let areas = document.querySelectorAll("textarea");
+  let filled = 0;
 
-  // Display logic
-  const resultBox = document.getElementById("result");
-  const scoreDetails = document.getElementById("score-details");
-  
-  resultBox.style.display = "block";
-  scoreDetails.innerHTML = `
-    <strong>Auto-graded MCQ Score:</strong> ${mcqScore} / 7 <br><br>
-    <strong>Pending Manual Review:</strong><br>
-    - 5 Scenario Questions (Up to 15 points)<br>
-    - 3 Leadership Questions (Up to 15 points)<br><br>
-    <strong>Max Total Potential:</strong> 37 points
-  `;
-
-  // Collect Open Text Answers for backend/evaluator
-  let openAnswers = {};
-  for(let i=8; i<=15; i++) {
-    let el = document.getElementById("q" + i);
-    if(el) {
-      openAnswers["q" + i] = el.value;
-    }
-  }
-  
-  console.log("Answers submitted for review:", {
-    mcqScore: mcqScore,
-    openEndedResponses: openAnswers
+  areas.forEach(a => {
+    if (a.value.length > 40) filled++;
   });
 
-  // Scroll to results
-  resultBox.scrollIntoView({ behavior: 'smooth' });
+  let score = Math.round((filled / areas.length) * 100);
+
+  let level = "Junior";
+  if (score > 40) level = "Mid";
+  if (score > 70) level = "Senior";
+  if (score > 85) level = "Lead";
+
+  document.getElementById("result").innerHTML =
+    "Score: " + score + "%<br>Level: " + level;
 }
+
 </script>
 
 </body>
