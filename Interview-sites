@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Team Lead Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 p-6 md:p-12">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+        <h1 class="text-3xl font-extrabold text-blue-900 mb-2">משימת בית: DevOps Team Lead</h1>
+        <p class="text-slate-500 mb-8">סביבת Azure - ניתוח ארכיטקטוני</p>
+        
+        <div class="bg-amber-50 border-r-4 border-amber-400 p-4 mb-8">
+            <h2 class="font-bold text-amber-800 mb-1">התרחיש:</h2>
+            <p class="text-sm">לפניך תרשים של סביבת Azure קיימת המורכבת מ-VNet שטוח. המשימה שלך היא לזהות את הכשלים הארכיטקטוניים ולהציע פתרון ל-Production מוכן.</p>
+        </div>
+
+        <img src="architecture.png" alt="Architecture Diagram" class="w-full rounded-lg mb-8 shadow-md border">
+
+        <h3 class="text-lg font-bold mb-4">המשימות (עד 60 דקות):</h3>
+        <ul class="space-y-3 mb-8 text-slate-700">
+            <li class="flex items-start">✅ <strong>Security:</strong> מהם ה-Security Risks של ה-Flat Network הזה?</li>
+            <li class="flex items-start">✅ <strong>Architecture:</strong> תאר איך אתה מבצע Migration ל-Hub-Spoke.</li>
+            <li class="flex items-start">✅ <strong>Optimization:</strong> איך אתה מנהל את ה-Ingress/Egress בצורה מאובטחת?</li>
+        </ul>
+
+        <div class="border-t pt-6">
+            <p class="mb-4 font-semibold">שלח את הפתרון שלך:</p>
+            <a href="mailto:your-email@company.com?subject=DevOps Challenge Submission" 
+               class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-bold">
+               שלח פתרון במייל
+            </a>
+        </div>
+    </div>
+</body>
+</html>
