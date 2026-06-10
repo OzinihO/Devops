@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DevOps Assessment</title>
+<title>DevOps Lead Assessment</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-body { background:#0b0e14; color:white; font-family:Arial; padding:20px; }
-.card { background:#111827; padding:15px; margin-bottom:15px; border-radius:10px; }
-textarea { width:100%; height:80px; margin-top:10px; }
-#timer { position:fixed; top:10px; right:10px; background:#1f2937; padding:10px; border-radius:8px; }
-button { width:100%; padding:15px; background:#2563eb; color:white; border:0; }
+body {
+  background: #0b0e14;
+  color: #e5e7eb;
+  font-family: system-ui;
+}
+
+.card {
+  background: rgba(30,41,59,0.8);
+  border: 1px solid #334155;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+textarea {
+  width: 100%;
+  height: 90px;
+  margin-top: 10px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#timer {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: #1f2937;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  font-weight: bold;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+h1 {
+  color: #38bdf8;
+  font-size: 28px;
+}
+.small {
+  color: #94a3b8;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 20px;
+}
 </style>
 </head>
 
@@ -17,45 +69,91 @@ button { width:100%; padding:15px; background:#2563eb; color:white; border:0; }
 
 <div id="timer">60:00</div>
 
-<h1>DevOps Lead Test</h1>
+<div style="max-width:900px;margin:auto;padding:20px">
 
-<div class="card">
-<h3>Networking</h3>
-<p>Zero Trust design in Azure?</p>
-<textarea></textarea>
+<div class="header">
+  <h1>DevOps Lead Assessment</h1>
+  <div class="small">System Design • AKS • Terraform • Security • Leadership</div>
 </div>
 
+<!-- MODULE 1 -->
 <div class="card">
-<h3>Terraform</h3>
-<p>State management risks?</p>
-<textarea></textarea>
+<h3>1. System Design (AKS Multi-Env)</h3>
+<p>Design a secure Azure AKS platform for multi-environment (Dev/UAT/Prod) with future multi-tenant support.</p>
+<textarea id="q1"></textarea>
 </div>
 
+<!-- MODULE 2 -->
 <div class="card">
-<h3>AKS</h3>
-<p>CrashLoopBackOff troubleshooting?</p>
-<textarea></textarea>
+<h3>2. AKS Incident Response</h3>
+<p>All pods in a namespace are in CrashLoopBackOff. Walk through your full debugging process.</p>
+<textarea id="q2"></textarea>
 </div>
 
+<!-- MODULE 3 -->
 <div class="card">
-<h3>Leadership</h3>
-<p>Production urgent feature - what do you do?</p>
-<textarea></textarea>
+<h3>3. Terraform & State Management</h3>
+<p>How do you prevent state corruption and handle multiple engineers working on the same infra?</p>
+<textarea id="q3"></textarea>
 </div>
 
-<button onclick="alert('Submitted')">Submit</button>
+<!-- MODULE 4 -->
+<div class="card">
+<h3>4. Security / Zero Trust</h3>
+<p>Design secure connectivity for AKS with no public exposure and Azure AD integration.</p>
+<textarea id="q4"></textarea>
+</div>
+
+<!-- MODULE 5 -->
+<div class="card">
+<h3>5. Production Release Risk</h3>
+<p>Dev wants to introduce Service Mesh one week before production release. What do you do?</p>
+<textarea id="q5"></textarea>
+</div>
+
+<!-- MODULE 6 -->
+<div class="card">
+<h3>6. Leadership Scenario</h3>
+<p>How do you handle conflicts between Dev velocity, Security constraints, and Ops stability?</p>
+<textarea id="q6"></textarea>
+</div>
+
+<button onclick="submitTest()">Submit Assessment</button>
+
+</div>
 
 <script>
-let time = 60*60;
+// TIMER
+let time = 60 * 60;
 
-setInterval(()=>{
- let m=Math.floor(time/60);
- let s=time%60;
- document.getElementById("timer").innerText =
- m+":"+(s<10?"0":"")+s;
- time--;
- if(time<0) alert("Time up");
-},1000);
+setInterval(() => {
+  let m = Math.floor(time / 60);
+  let s = time % 60;
+
+  document.getElementById("timer").innerText =
+    m + ":" + (s < 10 ? "0" : "") + s;
+
+  time--;
+
+  if (time <= 0) {
+    submitTest();
+  }
+}, 1000);
+
+// AUTO SAVE
+setInterval(() => {
+  let data = {};
+  for (let i = 1; i <= 6; i++) {
+    let el = document.getElementById("q" + i);
+    data["q" + i] = el.value;
+  }
+  localStorage.setItem("devops_test", JSON.stringify(data));
+}, 3000);
+
+function submitTest() {
+  alert("Assessment submitted successfully.");
+  console.log("Saved answers:", localStorage.getItem("devops_test"));
+}
 </script>
 
 </body>
