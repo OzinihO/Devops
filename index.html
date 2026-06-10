@@ -3,147 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 Advanced DevOps Assessment</title>
+<title>Interview Console – DevOps Assessment</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+body {
+  background: radial-gradient(circle at top, #050816, #02040a);
+  color: #e5e7eb;
+  font-family: ui-sans-serif, system-ui;
+}
 
-  body {
-    background: #020617; /* Slate 950 */
-    background-image: 
-      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
-    background-attachment: fixed;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    color: #f8fafc;
-    overflow-x: hidden;
-  }
+/* TOP BAR */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  background: rgba(2,6,23,0.7);
+  border-bottom: 1px solid rgba(148,163,184,0.15);
+  padding: 12px 20px;
+}
 
-  /* Futuristic Glass Panel */
-  .glass-panel {
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-    border-radius: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+/* PROGRESS */
+.progress {
+  height: 6px;
+  background: #0f172a;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#38bdf8,#6366f1);
+  transition: 0.3s;
+}
 
-  .glass-panel:hover {
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255,255,255,0.15);
-  }
+/* MODULE */
+.module {
+  margin-top: 30px;
+}
 
-  /* Question Cards */
-  .q-card {
-    background: rgba(30, 41, 59, 0.6);
-    border-left: 3px solid transparent;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-    transition: all 0.2s ease-in-out;
-  }
+/* CARD */
+.card {
+  background: rgba(15,23,42,0.65);
+  border: 1px solid rgba(148,163,184,0.15);
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 14px;
+  transition: 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56,189,248,0.4);
+  box-shadow: 0 10px 30px rgba(56,189,248,0.08);
+}
 
-  .q-card:hover {
-    background: rgba(30, 41, 59, 0.9);
-    border-left: 3px solid #38bdf8;
-  }
+/* QUESTION */
+.q-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 10px;
+}
 
-  /* Inputs & Radios */
-  input[type="radio"] {
-    accent-color: #38bdf8;
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-right: 12px;
-    cursor: pointer;
-  }
+/* OPTION */
+.option {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.option:hover {
+  background: rgba(56,189,248,0.08);
+}
+input[type="radio"] {
+  accent-color: #38bdf8;
+  transform: scale(1.1);
+}
 
-  label {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
+/* TIMER */
+#timer {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(56,189,248,0.3);
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #38bdf8;
+  font-weight: 600;
+}
 
-  label:hover {
-    background: rgba(56, 189, 248, 0.1);
-  }
+/* HEADER */
+.header {
+  padding: 40px 0 20px;
+  text-align: center;
+}
 
-  textarea {
-    width: 100%;
-    height: 120px;
-    background: rgba(2, 6, 23, 0.7);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    color: #e2e8f0;
-    border-radius: 12px;
-    padding: 16px;
-    font-family: monospace;
-    resize: vertical;
-    transition: border 0.3s, box-shadow 0.3s;
-  }
-
-  textarea:focus {
-    outline: none;
-    border-color: #38bdf8;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-  }
-
-  /* Buttons */
-  .btn-submit {
-    background: linear-gradient(135deg, #0ea5e9, #6366f1);
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
-    transition: all 0.3s ease;
-  }
-
-  .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(14, 165, 233, 0.7);
-  }
-
-  /* Progress & Timer */
-  #timer {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 12px 20px;
-    border-radius: 16px;
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    color: #38bdf8;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-    z-index: 100;
-  }
-
-  .progress-container {
-    background: rgba(15, 23, 42, 0.6);
-    height: 8px;
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 30px 0;
-    border: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #38bdf8, #818cf8);
-    box-shadow: 0 0 10px #38bdf8;
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .category-title {
-    background: -webkit-linear-gradient(45deg, #38bdf8, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-  }
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg,#38bdf8,#818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
 </head>
 
@@ -151,336 +115,92 @@
 
 <div id="timer">60:00</div>
 
-<div class="max-w-5xl mx-auto p-6 pb-24">
+<div class="max-w-5xl mx-auto px-6 pb-24">
 
-  <div class="glass-panel p-10 mb-8 text-center mt-12 relative overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-48 h-48 bg-sky-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-    <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-    <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Enterprise Infrastructure Matrix</h1>
-    <p class="text-slate-400 text-lg">DevOps • System • AKS • Network • DNS • Terraform</p>
-  </div>
+<!-- HEADER -->
+<div class="header">
+  <h1>Interview Console</h1>
+  <p class="text-slate-400 mt-2">DevOps • Azure • SRE • Kubernetes • Architecture</p>
+</div>
 
-  <div class="progress-container"><div class="progress-fill" id="progress"></div></div>
+<!-- PROGRESS -->
+<div class="progress">
+  <div class="progress-fill" id="bar"></div>
+</div>
 
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-4">Architecture Context (Optional)</h2>
-    <input type="file" onchange="loadImage(event)" class="block w-full text-sm text-slate-400 file:mr-4 file:py-3 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-500/10 file:text-sky-400 hover:file:bg-sky-500/20 cursor-pointer transition">
-    <img id="img" style="display:none;margin-top:20px;border-radius:16px; border: 1px solid rgba(255,255,255,0.1);">
-  </div>
+<!-- MODULE 1 -->
+<div class="module">
+<h2 class="text-sky-400 font-semibold">Azure Architecture</h2>
 
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">1. Core DevOps & CI/CD</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">1.1 Which of the following is NOT one of the 4 DORA metrics?</p>
-      <label><input type="radio" name="q1" value="0"> Deployment Frequency</label>
-      <label><input type="radio" name="q1" value="0"> Lead Time for Changes</label>
-      <label><input type="radio" name="q1" value="1"> Lines of Code Deployed per Hour</label>
-      <label><input type="radio" name="q1" value="0"> Time to Restore Service</label>
-    </div>
+<div class="card">
+<div class="q-title">1. What is the correct way to secure internal service communication?</div>
+<label class="option"><input type="radio" name="q1"> Private Link + VNet Integration</label>
+<label class="option"><input type="radio" name="q1"> Public IP with firewall rules</label>
+<label class="option"><input type="radio" name="q1"> Open internet access</label>
+</div>
 
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">1.2 In GitOps (e.g., ArgoCD), what is the "Source of Truth"?</p>
-      <label><input type="radio" name="q2" value="0"> The Kubernetes cluster state</label>
-      <label><input type="radio" name="q2" value="1"> The Git repository containing manifests</label>
-      <label><input type="radio" name="q2" value="0"> The CI pipeline artifacts</label>
-      <label><input type="radio" name="q2" value="0"> The Container Registry</label>
-    </div>
+<div class="card">
+<div class="q-title">2. Best architecture pattern for enterprise Azure?</div>
+<label class="option"><input type="radio" name="q2"> Hub & Spoke with centralized networking</label>
+<label class="option"><input type="radio" name="q2"> Flat network</label>
+<label class="option"><input type="radio" name="q2"> No network separation</label>
+</div>
+</div>
 
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">1.3 What is the most secure way for a pipeline to authenticate to Azure?</p>
-      <label><input type="radio" name="q3" value="0"> Hardcoded Client Secret in variables</label>
-      <label><input type="radio" name="q3" value="1"> Workload Identity federation (OIDC)</label>
-      <label><input type="radio" name="q3" value="0"> Username and Password</label>
-      <label><input type="radio" name="q3" value="0"> Personal Access Token (PAT) with long expiration</label>
-    </div>
+<!-- MODULE 2 -->
+<div class="module">
+<h2 class="text-indigo-400 font-semibold">AKS / Kubernetes</h2>
 
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">1.4 Main advantage of Blue/Green deployments?</p>
-      <label><input type="radio" name="q4" value="0"> Uses 50% less compute resources</label>
-      <label><input type="radio" name="q4" value="0"> Automatically scales databases</label>
-      <label><input type="radio" name="q4" value="1"> Instant rollback by switching traffic</label>
-      <label><input type="radio" name="q4" value="0"> No need for testing</label>
-    </div>
+<div class="card">
+<div class="q-title">3. First step when pods crash loop?</div>
+<label class="option"><input type="radio" name="q3"> kubectl logs + describe</label>
+<label class="option"><input type="radio" name="q3"> restart cluster</label>
+<label class="option"><input type="radio" name="q3"> delete namespace</label>
+</div>
 
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 1</p>
-      <p class="mb-3 text-slate-300">Design an enterprise CI/CD pipeline for a microservice. Detail the stages from Git Push to Production, including security scans (SAST/DAST) and gated approvals.</p>
-      <textarea placeholder="Type your architectural approach here..."></textarea>
-    </div>
-  </div>
+<div class="card">
+<div class="q-title">4. Best scaling strategy?</div>
+<label class="option"><input type="radio" name="q4"> HPA + Cluster Autoscaler</label>
+<label class="option"><input type="radio" name="q4"> manual scaling</label>
+<label class="option"><input type="radio" name="q4"> fixed nodes</label>
+</div>
+</div>
 
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">2. System & OS Internals</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">2.1 What causes the Linux OOM (Out Of Memory) Killer to terminate a process?</p>
-      <label><input type="radio" name="q5" value="0"> CPU reaching 100%</label>
-      <label><input type="radio" name="q5" value="1"> System runs out of RAM and Swap space</label>
-      <label><input type="radio" name="q5" value="0"> Process runs for too long</label>
-      <label><input type="radio" name="q5" value="0"> Hard drive runs out of inodes</label>
-    </div>
+<!-- MODULE 3 -->
+<div class="module">
+<h2 class="text-cyan-400 font-semibold">DevOps / CI-CD</h2>
 
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">2.2 What does a high 'iowait' percentage typically indicate?</p>
-      <label><input type="radio" name="q6" value="1"> CPU is idle waiting for disk/network I/O operations</label>
-      <label><input type="radio" name="q6" value="0"> The RAM is extremely fast</label>
-      <label><input type="radio" name="q6" value="0"> The application is stuck in an infinite loop</label>
-      <label><input type="radio" name="q6" value="0"> Network bandwidth is fully optimized</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">2.3 "No space left on device" error, but 'df -h' shows 50% free space. What is the issue?</p>
-      <label><input type="radio" name="q7" value="0"> RAM is full</label>
-      <label><input type="radio" name="q7" value="0"> The CPU is overheating</label>
-      <label><input type="radio" name="q7" value="1"> The file system ran out of inodes (df -i)</label>
-      <label><input type="radio" name="q7" value="0"> Swap is disabled</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">2.4 Which command traces system calls and signals of a process?</p>
-      <label><input type="radio" name="q8" value="0"> top</label>
-      <label><input type="radio" name="q8" value="1"> strace</label>
-      <label><input type="radio" name="q8" value="0"> netstat</label>
-      <label><input type="radio" name="q8" value="0"> ping</label>
-    </div>
-
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 2</p>
-      <p class="mb-3 text-slate-300">You are alerted that a critical Linux server has a CPU Load Average of 80.0 on a 4-core machine, but top shows user CPU at 5%. How do you troubleshoot this?</p>
-      <textarea placeholder="Describe your Linux debugging steps..."></textarea>
-    </div>
-  </div>
-
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">3. AKS & Kubernetes Architecture</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">3.1 What is the primary role of the Kubernetes Kubelet?</p>
-      <label><input type="radio" name="q9" value="0"> Routes external traffic to services</label>
-      <label><input type="radio" name="q9" value="0"> Stores cluster state (etcd)</label>
-      <label><input type="radio" name="q9" value="1"> Ensures containers are running in a Pod on its node</label>
-      <label><input type="radio" name="q9" value="0"> Assigns IP addresses to nodes</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">3.2 To block traffic between two namespaces in AKS, what should you configure?</p>
-      <label><input type="radio" name="q10" value="0"> Ingress Controller</label>
-      <label><input type="radio" name="q10" value="1"> Network Policies (e.g., Calico/Cilium)</label>
-      <label><input type="radio" name="q10" value="0"> Azure Firewall ONLY</label>
-      <label><input type="radio" name="q10" value="0"> Pod Disruption Budgets</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">3.3 Pod status is "Pending" for a long time. Most likely reason?</p>
-      <label><input type="radio" name="q11" value="1"> Insufficient CPU/Memory resources on nodes</label>
-      <label><input type="radio" name="q11" value="0"> Image pull failure (ErrImagePull)</label>
-      <label><input type="radio" name="q11" value="0"> Application code crashed (CrashLoopBackOff)</label>
-      <label><input type="radio" name="q11" value="0"> Readiness probe failed</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">3.4 What replaces Cluster Autoscaler for faster, more flexible node provisioning?</p>
-      <label><input type="radio" name="q12" value="0"> HPA (Horizontal Pod Autoscaler)</label>
-      <label><input type="radio" name="q12" value="0"> VPA (Vertical Pod Autoscaler)</label>
-      <label><input type="radio" name="q12" value="1"> Karpenter</label>
-      <label><input type="radio" name="q12" value="0"> Keda</label>
-    </div>
-
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 3</p>
-      <p class="mb-3 text-slate-300">A newly deployed service in AKS cannot reach an external Azure Database. Describe your step-by-step approach to debug this network path.</p>
-      <textarea placeholder="Network flow analysis from Pod to DB..."></textarea>
-    </div>
-  </div>
-
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">4. Cloud Networking (Azure)</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">4.1 Which service connects on-premise networks directly to Azure without traversing the public internet?</p>
-      <label><input type="radio" name="q13" value="0"> Azure Front Door</label>
-      <label><input type="radio" name="q13" value="0"> Azure Bastion</label>
-      <label><input type="radio" name="q13" value="1"> Azure ExpressRoute</label>
-      <label><input type="radio" name="q13" value="0"> Azure Application Gateway</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">4.2 What happens during SNAT port exhaustion?</p>
-      <label><input type="radio" name="q14" value="1"> Outbound connections to external services drop</label>
-      <label><input type="radio" name="q14" value="0"> Inbound traffic gets DDoS protection</label>
-      <label><input type="radio" name="q14" value="0"> Internal VNet peering fails</label>
-      <label><input type="radio" name="q14" value="0"> Disks detach from VMs</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">4.3 To inspect and filter OSI Layer 7 web traffic (SQLi, XSS), you should use:</p>
-      <label><input type="radio" name="q15" value="0"> Network Security Groups (NSG)</label>
-      <label><input type="radio" name="q15" value="1"> Web Application Firewall (WAF)</label>
-      <label><input type="radio" name="q15" value="0"> Azure Route Table</label>
-      <label><input type="radio" name="q15" value="0"> ExpressRoute</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">4.4 Transitive routing in a Hub-Spoke topology is usually handled by:</p>
-      <label><input type="radio" name="q16" value="0"> Default NSG rules</label>
-      <label><input type="radio" name="q16" value="1"> Azure Firewall or an NVA in the Hub</label>
-      <label><input type="radio" name="q16" value="0"> Direct VNet peering between all spokes</label>
-      <label><input type="radio" name="q16" value="0"> Azure Load Balancer</label>
-    </div>
-
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 4</p>
-      <p class="mb-3 text-slate-300">Design a Hub-Spoke network architecture across two Azure regions. Address disaster recovery, VNet peering limits, and central firewall routing.</p>
-      <textarea placeholder="Architecture design reasoning..."></textarea>
-    </div>
-  </div>
-
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">5. DNS Architecture</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">5.1 What is "Split-brain DNS"?</p>
-      <label><input type="radio" name="q17" value="0"> When DNS servers crash simultaneously</label>
-      <label><input type="radio" name="q17" value="1"> Different DNS resolution for internal vs external clients for the same domain</label>
-      <label><input type="radio" name="q17" value="0"> Load balancing across two DNS providers</label>
-      <label><input type="radio" name="q17" value="0"> DNSSEC signature failure</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">5.2 A CNAME record points to:</p>
-      <label><input type="radio" name="q18" value="0"> An IPv4 address directly</label>
-      <label><input type="radio" name="q18" value="0"> An IPv6 address directly</label>
-      <label><input type="radio" name="q18" value="1"> Another domain name</label>
-      <label><input type="radio" name="q18" value="0"> A specific TCP port</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">5.3 In Azure, what is strictly required to resolve a Private Endpoint across peered VNets?</p>
-      <label><input type="radio" name="q19" value="0"> A Public IP on the Private Endpoint</label>
-      <label><input type="radio" name="q19" value="1"> Azure Private DNS Zone linked to the VNets</label>
-      <label><input type="radio" name="q19" value="0"> Disabling Network Policies</label>
-      <label><input type="radio" name="q19" value="0"> ExpressRoute Global Reach</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">5.4 Default DNS server inside a Kubernetes cluster is usually:</p>
-      <label><input type="radio" name="q20" value="0"> BIND9</label>
-      <label><input type="radio" name="q20" value="0"> Route53</label>
-      <label><input type="radio" name="q20" value="1"> CoreDNS</label>
-      <label><input type="radio" name="q20" value="0"> Kube-proxy</label>
-    </div>
-
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 5</p>
-      <p class="mb-3 text-slate-300">Explain the full DNS resolution flow when a VM in Spoke A tries to resolve an Azure SQL Private Endpoint located in Spoke B using Hub-based DNS Private Resolver.</p>
-      <textarea placeholder="DNS flow step-by-step..."></textarea>
-    </div>
-  </div>
-
-  <div class="glass-panel p-8 mb-8">
-    <h2 class="text-2xl category-title mb-6">6. Terraform & IaC</h2>
-    
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">6.1 What is the purpose of Terraform State Locking?</p>
-      <label><input type="radio" name="q21" value="0"> Encrypts the state file</label>
-      <label><input type="radio" name="q21" value="1"> Prevents concurrent runs from corrupting the state</label>
-      <label><input type="radio" name="q21" value="0"> Locks module versions to prevent updates</label>
-      <label><input type="radio" name="q21" value="0"> Stops cloud providers from billing</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">6.2 Why is `for_each` generally safer than `count` for creating multiple resources?</p>
-      <label><input type="radio" name="q22" value="0"> `for_each` runs faster</label>
-      <label><input type="radio" name="q22" value="1"> Modifying a middle item doesn't recreate subsequent resources</label>
-      <label><input type="radio" name="q22" value="0"> `count` only accepts strings</label>
-      <label><input type="radio" name="q22" value="0"> `for_each` automatically handles IAM roles</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">6.3 How do you bring an existing manual cloud resource under Terraform management?</p>
-      <label><input type="radio" name="q23" value="0"> terraform apply -force</label>
-      <label><input type="radio" name="q23" value="0"> terraform plan -sync</label>
-      <label><input type="radio" name="q23" value="1"> terraform import (or import block)</label>
-      <label><input type="radio" name="q23" value="0"> You must delete and recreate it</label>
-    </div>
-
-    <div class="q-card">
-      <p class="text-lg font-semibold mb-3">6.4 Using local state files in a team environment causes:</p>
-      <label><input type="radio" name="q24" value="0"> Faster deployments</label>
-      <label><input type="radio" name="q24" value="1"> State drift, conflicts, and exposed secrets</label>
-      <label><input type="radio" name="q24" value="0"> Better security</label>
-      <label><input type="radio" name="q24" value="0"> Automatic backups</label>
-    </div>
-
-    <div class="q-card border-l-purple-500">
-      <p class="text-lg font-semibold mb-3 text-purple-400">Open Question 6</p>
-      <p class="mb-3 text-slate-300">You inherited a massive, single `main.tf` file managing 500 resources. Describe your strategy to refactor this into modules and remote state without destroying production.</p>
-      <textarea placeholder="Refactoring strategy and commands used..."></textarea>
-    </div>
-  </div>
-
-  <button class="btn-submit w-full py-5 rounded-2xl font-bold text-xl uppercase tracking-wider text-white" onclick="submitTest()">
-    Initialize Assessment Diagnostics
-  </button>
-
-  <div id="result" class="glass-panel text-center mt-8 p-8 text-2xl hidden"></div>
+<div class="card">
+<div class="q-title">5. Best deployment strategy?</div>
+<label class="option"><input type="radio" name="q5"> Blue/Green or Canary</label>
+<label class="option"><input type="radio" name="q5"> direct production deploy</label>
+<label class="option"><input type="radio" name="q5"> manual upload</label>
+</div>
+</div>
 
 </div>
 
 <script>
-// Timer Logic
-let time = 60 * 60;
-let timerEl = document.getElementById("timer");
 
-let timerInterval = setInterval(() => {
-  let m = Math.floor(time / 60);
-  let s = time % 60;
-  timerEl.innerText = m + ":" + (s < 10 ? "0" : "") + s;
-  time--;
-  if(time < 0) {
-    clearInterval(timerInterval);
-    submitTest();
-  }
-}, 1000);
+// timer
+let t=3600;
+setInterval(()=>{
+  let m=Math.floor(t/60);
+  let s=t%60;
+  document.getElementById("timer").innerText=
+    m+":"+String(s).padStart(2,"0");
+  t--;
+},1000);
 
-// Dynamic Progress Bar
-function updateProgress(){
-  let totalMCQ = 24;
-  let checked = document.querySelectorAll("input[type=radio]:checked").length;
-  let progressPercent = (checked / totalMCQ) * 100;
-  document.getElementById("progress").style.width = progressPercent + "%";
-}
-document.addEventListener("change", updateProgress);
+// progress
+document.addEventListener("change",()=>{
+  let total=5;
+  let checked=document.querySelectorAll("input:checked").length;
+  document.getElementById("bar").style.width=
+    (checked/total)*100+"%";
+});
 
-// Image Upload Preview
-function loadImage(e){
-  let img = document.getElementById("img");
-  img.src = URL.createObjectURL(e.target.files[0]);
-  img.style.display = "block";
-}
+</script>
 
-// Submission Logic
-function submitTest(){
-  clearInterval(timerInterval);
-  let score = 0;
-  let maxScore = 24;
-
-  document.querySelectorAll("input[type=radio]").forEach(r => {
-    if(r.checked) score += parseInt(r.value);
-  });
-
-  let level = "Junior Engineer";
-  let color = "#94a3b8"; // Slate
-
-  if(score >= 12) { level = "Mid-Level DevOps"; color = "#38bdf8"; } // Sky
-  if(score >= 18) { level = "Senior DevOps"; color = "#a78bfa"; } // Purple
-  if(score >= 22) { level = "Lead / Principal Architect"; color = "#10b981"; } // Emerald
-
-  let resBox = document.getElementById("result");
-  resBox.style.display = "block";
-  resBox.innerHTML = `
-    <h3 style="color:${color}; font-size:2rem; font-weight:bold; margin-bottom:10px;">Diagnostic Complete</h3>
-    <p class="text-slate-300 mb-2">Automated Score: <span class="text-white font-bold">${score} / ${maxScore}</span></p>
-    <p class="text-slate-300">Estimated Tier: <span style="color:${color}; font-weight:bold;">${level}</span></p>
-    <p class="text-
+</body>
+</html>
