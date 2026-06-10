@@ -2,65 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DevOps Lead Assessment</title>
+<title>DevOps Architecture Assessment</title>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 body {
-  background: #0b0e14;
-  color: #e5e7eb;
+  background:#0b0e14;
+  color:#e5e7eb;
   font-family: system-ui;
 }
 
 .card {
-  background: rgba(30,41,59,0.8);
+  background: rgba(30,41,59,0.85);
   border: 1px solid #334155;
   border-radius: 14px;
   padding: 18px;
   margin-bottom: 16px;
 }
 
-textarea {
-  width: 100%;
-  height: 90px;
-  margin-top: 10px;
-  background: #0f172a;
-  border: 1px solid #334155;
-  color: white;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-#timer {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  background: #1f2937;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #334155;
-  font-weight: bold;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-h1 {
-  color: #38bdf8;
-  font-size: 28px;
-}
-.small {
-  color: #94a3b8;
-}
 button {
   width: 100%;
   padding: 14px;
-  background: #2563eb;
+  background:#2563eb;
   border-radius: 10px;
   font-weight: bold;
   margin-top: 20px;
+}
+
+textarea {
+  width:100%;
+  height:80px;
+  margin-top:10px;
+  background:#0f172a;
+  border:1px solid #334155;
+  color:white;
+  border-radius:8px;
+  padding:10px;
+}
+
+#timer {
+  position:fixed;
+  top:12px;
+  right:12px;
+  background:#1f2937;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #334155;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -71,54 +59,66 @@ button {
 
 <div style="max-width:900px;margin:auto;padding:20px">
 
-<div class="header">
-  <h1>DevOps Lead Assessment</h1>
-  <div class="small">System Design • AKS • Terraform • Security • Leadership</div>
+<h1 style="color:#38bdf8;font-size:28px;">DevOps Architecture Assessment</h1>
+<p style="color:#94a3b8;">Flat / Distributed Azure Architecture – 60 Minutes</p>
+
+<!-- MCQ 1 -->
+<div class="card">
+<h3>1. Main advantage of Flat architecture?</h3>
+<label><input type="radio" name="q1" value="0"> Lower cost</label><br>
+<label><input type="radio" name="q1" value="1"> Higher isolation between environments</label><br>
+<label><input type="radio" name="q1" value="0"> Easier shared networking</label>
 </div>
 
-<!-- MODULE 1 -->
+<!-- MCQ 2 -->
 <div class="card">
-<h3>1. System Design (AKS Multi-Env)</h3>
-<p>Design a secure Azure AKS platform for multi-environment (Dev/UAT/Prod) with future multi-tenant support.</p>
-<textarea id="q1"></textarea>
+<h3>2. Biggest challenge without Hub?</h3>
+<label><input type="radio" name="q2" value="1"> Harder centralized governance</label><br>
+<label><input type="radio" name="q2" value="0"> No AKS support</label><br>
+<label><input type="radio" name="q2" value="0"> No VNet support</label>
 </div>
 
-<!-- MODULE 2 -->
+<!-- MCQ 3 -->
 <div class="card">
-<h3>2. AKS Incident Response</h3>
-<p>All pods in a namespace are in CrashLoopBackOff. Walk through your full debugging process.</p>
-<textarea id="q2"></textarea>
+<h3>3. Secure service-to-service communication?</h3>
+<label><input type="radio" name="q3" value="0"> Public endpoints</label><br>
+<label><input type="radio" name="q3" value="1"> Private endpoints + mTLS</label><br>
+<label><input type="radio" name="q3" value="0"> SSH tunnels</label>
 </div>
 
-<!-- MODULE 3 -->
+<!-- MCQ 4 -->
 <div class="card">
-<h3>3. Terraform & State Management</h3>
-<p>How do you prevent state corruption and handle multiple engineers working on the same infra?</p>
-<textarea id="q3"></textarea>
+<h3>4. Observability strategy?</h3>
+<label><input type="radio" name="q4" value="0"> Per VM only</label><br>
+<label><input type="radio" name="q4" value="1"> Centralized logging + metrics</label><br>
+<label><input type="radio" name="q4" value="0"> No monitoring needed</label>
 </div>
 
-<!-- MODULE 4 -->
+<!-- MCQ 5 -->
 <div class="card">
-<h3>4. Security / Zero Trust</h3>
-<p>Design secure connectivity for AKS with no public exposure and Azure AD integration.</p>
-<textarea id="q4"></textarea>
+<h3>5. How do you handle DNS in distributed architecture?</h3>
+<label><input type="radio" name="q5" value="1"> Centralized private DNS zones</label><br>
+<label><input type="radio" name="q5" value="0"> Public DNS only</label><br>
+<label><input type="radio" name="q5" value="0"> No DNS needed</label>
 </div>
 
-<!-- MODULE 5 -->
+<!-- OPEN Q1 -->
 <div class="card">
-<h3>5. Production Release Risk</h3>
-<p>Dev wants to introduce Service Mesh one week before production release. What do you do?</p>
-<textarea id="q5"></textarea>
-</div>
-
-<!-- MODULE 6 -->
-<div class="card">
-<h3>6. Leadership Scenario</h3>
-<p>How do you handle conflicts between Dev velocity, Security constraints, and Ops stability?</p>
+<h3>6. Design Question</h3>
+<p>Design a 3-environment Azure architecture without Hub-Spoke. Include AKS, security, observability.</p>
 <textarea id="q6"></textarea>
 </div>
 
+<!-- OPEN Q2 -->
+<div class="card">
+<h3>7. Trade-offs</h3>
+<p>Compare Flat vs Hub-Spoke in terms of security, cost, and operations.</p>
+<textarea id="q7"></textarea>
+</div>
+
 <button onclick="submitTest()">Submit Assessment</button>
+
+<div id="result" style="margin-top:20px;font-size:20px;"></div>
 
 </div>
 
@@ -134,27 +134,36 @@ setInterval(() => {
     m + ":" + (s < 10 ? "0" : "") + s;
 
   time--;
-
-  if (time <= 0) {
-    submitTest();
-  }
+  if (time < 0) submitTest();
 }, 1000);
 
-// AUTO SAVE
-setInterval(() => {
-  let data = {};
-  for (let i = 1; i <= 6; i++) {
-    let el = document.getElementById("q" + i);
-    data["q" + i] = el.value;
-  }
-  localStorage.setItem("devops_test", JSON.stringify(data));
-}, 3000);
-
+// SCORING
 function submitTest() {
-  alert("Assessment submitted successfully.");
-  console.log("Saved answers:", localStorage.getItem("devops_test"));
+  let score = 0;
+
+  for (let i = 1; i <= 5; i++) {
+    let radios = document.getElementsByName("q" + i);
+    radios.forEach(r => {
+      if (r.checked) score += parseInt(r.value);
+    });
+  }
+
+  let level = "";
+
+  if (score <= 1) level = "Junior";
+  else if (score == 2) level = "Mid";
+  else if (score == 3) level = "Senior";
+  else level = "Lead";
+
+  document.getElementById("result").innerHTML =
+    "Score: " + score + "/5<br>Level: " + level;
+
+  console.log("Answers saved (open text not scored):",
+    document.getElementById("q6").value,
+    document.getElementById("q7").value
+  );
 }
 </script>
 
 </body>
-</html>
+</html> 
