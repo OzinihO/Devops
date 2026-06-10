@@ -8,52 +8,60 @@
 <style>
 body {
   background: radial-gradient(circle at top, #0b1220, #05070d);
-  color: #e5e7eb;
   font-family: system-ui;
+  color: #e5e7eb;
+}
+
+.glass {
+  background: rgba(30,41,59,0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: 16px;
 }
 
 .card {
-  background: rgba(30,41,59,0.75);
+  background: rgba(15,23,42,0.75);
   border: 1px solid #334155;
   border-radius: 14px;
   padding: 16px;
-  margin-bottom: 14px;
 }
 
-textarea {
-  width:100%;
-  height:70px;
-  margin-top:8px;
-  background:#0b1220;
-  border:1px solid #334155;
-  color:white;
-  border-radius:10px;
-  padding:10px;
+input[type="radio"] {
+  margin-right: 8px;
 }
 
 button {
   width:100%;
   padding:14px;
-  border-radius:10px;
+  border-radius:12px;
   font-weight:bold;
+  background: linear-gradient(135deg,#2563eb,#1d4ed8);
 }
 
 #timer {
   position:fixed;
   top:12px;
   right:12px;
-  background:#1f2937;
+  background: rgba(30,41,59,0.9);
   padding:10px 14px;
-  border-radius:10px;
-  border:1px solid #334155;
-  font-weight:bold;
-}
-
-img {
-  width:100%;
-  margin-top:10px;
   border-radius:12px;
   border:1px solid #334155;
+  font-weight:bold;
+  color:#38bdf8;
+}
+
+.bar {
+  height:6px;
+  background:#1f2937;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.bar-fill {
+  height:100%;
+  width:0%;
+  background:#38bdf8;
 }
 </style>
 </head>
@@ -62,118 +70,143 @@ img {
 
 <div id="timer">60:00</div>
 
-<div style="max-width:900px;margin:auto;padding:20px">
+<div style="max-width:1000px;margin:auto;padding:24px">
 
-<h1 style="color:#38bdf8;font-size:26px;">DevOps Assessment Platform</h1>
-<p style="color:#94a3b8;">No backend • GitHub Pages • Full Interview System</p>
+<div class="glass p-6 mb-6 text-center">
+  <h1 class="text-3xl font-bold text-sky-400">DevOps Architecture Assessment</h1>
+  <p class="text-slate-400">Azure • AKS • Terraform • Security • ADO • SRE</p>
+</div>
 
-<!-- CANDIDATE INFO -->
+<div class="bar"><div class="bar-fill" id="progress"></div></div>
+
+<!-- ARCH UPLOAD -->
+<div class="glass p-5 mb-6">
+  <h2 class="text-sky-400 font-bold">Architecture</h2>
+  <input type="file" onchange="loadImage(event)" class="mt-3">
+  <img id="img" style="display:none;margin-top:10px;border-radius:12px;">
+</div>
+
+<!-- SECTION A -->
+<div class="glass p-5 mb-4">
+<h2 class="text-sky-400 font-bold mb-2">Azure / Architecture</h2>
+
 <div class="card">
-<h3>Candidate Name</h3>
-<input id="name" style="width:100%;padding:10px;border-radius:8px;background:#0b1220;border:1px solid #334155;color:white;">
+<p>1. What is the main benefit of a distributed Azure architecture?</p>
+<label><input type="radio" name="q1" value="1"> Better isolation between environments</label><br>
+<label><input type="radio" name="q1" value="0"> Lower cost only</label><br>
+<label><input type="radio" name="q1" value="0"> No need for networking</label>
 </div>
 
-<!-- IMAGE UPLOAD -->
 <div class="card">
-<h3>Architecture Upload</h3>
-<input type="file" accept="image/*" onchange="loadImage(event)">
-<img id="img" style="display:none;">
+<p>2. How should services communicate securely?</p>
+<label><input type="radio" name="q2" value="1"> Private Endpoints + Managed Identity</label><br>
+<label><input type="radio" name="q2" value="0"> Public IPs</label><br>
+<label><input type="radio" name="q2" value="0"> SSH tunnels</label>
+</div>
 </div>
 
-<!-- QUESTIONS -->
-<div id="qs">
+<!-- SECTION B -->
+<div class="glass p-5 mb-4">
+<h2 class="text-sky-400 font-bold mb-2">AKS / Kubernetes</h2>
 
-<div class="card"><b>1. System overview</b><textarea></textarea></div>
-<div class="card"><b>2. Main components</b><textarea></textarea></div>
-<div class="card"><b>3. Security risks</b><textarea></textarea></div>
-<div class="card"><b>4. Traffic flow</b><textarea></textarea></div>
-<div class="card"><b>5. Identity model (Entra ID / RBAC)</b><textarea></textarea></div>
-
-<div class="card"><b>6. Scaling strategy</b><textarea></textarea></div>
-<div class="card"><b>7. CI/CD design (Azure DevOps)</b><textarea></textarea></div>
-<div class="card"><b>8. Observability (logs/metrics/traces)</b><textarea></textarea></div>
-<div class="card"><b>9. Biggest risks in architecture</b><textarea></textarea></div>
-<div class="card"><b>10. Disaster recovery strategy</b><textarea></textarea></div>
-
-<div class="card"><b>11. AKS CrashLoopBackOff troubleshooting</b><textarea></textarea></div>
-<div class="card"><b>12. Terraform state issue handling</b><textarea></textarea></div>
-<div class="card"><b>13. Key Vault access issue debugging</b><textarea></textarea></div>
-<div class="card"><b>14. Network latency investigation</b><textarea></textarea></div>
-
-<div class="card"><b>15. Leadership: Dev vs Security vs Ops conflict</b><textarea></textarea></div>
-
+<div class="card">
+<p>3. Pods stuck in CrashLoopBackOff — first step?</p>
+<label><input type="radio" name="q3" value="1"> kubectl logs + describe</label><br>
+<label><input type="radio" name="q3" value="0"> Restart cluster</label><br>
+<label><input type="radio" name="q3" value="0"> Delete namespace immediately</label>
 </div>
 
-<button onclick="submitTest()" style="background:#2563eb;color:white;">
-Submit & Export Result
-</button>
+<div class="card">
+<p>4. Best practice for AKS scaling?</p>
+<label><input type="radio" name="q4" value="1"> HPA + Cluster Autoscaler</label><br>
+<label><input type="radio" name="q4" value="0"> Manual scaling only</label><br>
+<label><input type="radio" name="q4" value="0"> Fixed nodes always</label>
+</div>
+</div>
 
-<div id="result" style="margin-top:20px;"></div>
+<!-- SECTION C -->
+<div class="glass p-5 mb-4">
+<h2 class="text-sky-400 font-bold mb-2">Terraform / CI-CD</h2>
+
+<div class="card">
+<p>5. Biggest risk in Terraform state?</p>
+<label><input type="radio" name="q5" value="1"> No remote backend + locking</label><br>
+<label><input type="radio" name="q5" value="0"> Using modules</label><br>
+<label><input type="radio" name="q5" value="0"> Version pinning</label>
+</div>
+
+<div class="card">
+<p>6. Best CI/CD practice?</p>
+<label><input type="radio" name="q6" value="1"> Pipeline with approvals + stages</label><br>
+<label><input type="radio" name="q6" value="0"> Manual deploy</label><br>
+<label><input type="radio" name="q6" value="0"> Direct production deploy</label>
+</div>
+</div>
+
+<!-- OPEN -->
+<div class="glass p-5 mb-4">
+<h2 class="text-sky-400 font-bold">Open Questions</h2>
+
+<div class="card">
+<p>7. Design a secure Azure platform without Hub-Spoke.</p>
+<textarea></textarea>
+</div>
+
+<div class="card">
+<p>8. How do you handle production incident in AKS?</p>
+<textarea></textarea>
+</div>
+</div>
+
+<button onclick="submitTest()">Submit Assessment</button>
+
+<div id="result" class="text-center mt-6 text-xl"></div>
 
 </div>
 
 <script>
 
-// TIMER
-let time = 60 * 60;
+let time = 60*60;
 
-setInterval(() => {
-  let m = Math.floor(time / 60);
-  let s = time % 60;
+setInterval(()=>{
+ let m=Math.floor(time/60);
+ let s=time%60;
+ document.getElementById("timer").innerText =
+ m+":"+(s<10?"0":"")+s;
+ time--;
+ if(time<0) submitTest();
+},1000);
 
-  document.getElementById("timer").innerText =
-    m + ":" + (s < 10 ? "0" : "") + s;
+// progress
+function updateProgress(){
+ let total = 6;
+ let checked = document.querySelectorAll("input[type=radio]:checked").length;
+ document.getElementById("progress").style.width =
+ (checked/total)*100 + "%";
+}
+document.addEventListener("change", updateProgress);
 
-  time--;
-  if (time < 0) submitTest();
-}, 1000);
-
-// IMAGE
-function loadImage(e) {
-  const img = document.getElementById("img");
-  img.src = URL.createObjectURL(e.target.files[0]);
-  img.style.display = "block";
+// image
+function loadImage(e){
+ let img=document.getElementById("img");
+ img.src=URL.createObjectURL(e.target.files[0]);
+ img.style.display="block";
 }
 
-// SAVE LOCALLY
-setInterval(() => {
-  let data = [];
-  document.querySelectorAll("textarea").forEach(t => data.push(t.value));
-  localStorage.setItem("answers", JSON.stringify(data));
-}, 3000);
+// submit
+function submitTest(){
+ let score=0;
+ document.querySelectorAll("input[type=radio]").forEach(r=>{
+  if(r.checked) score+=parseInt(r.value);
+ });
 
-// EXPORT RESULT
-function submitTest() {
-  let name = document.getElementById("name").value || "candidate";
+ let level="Junior";
+ if(score>=3) level="Mid";
+ if(score>=5) level="Senior";
+ if(score>=6) level="Lead";
 
-  let answers = [];
-  document.querySelectorAll("textarea").forEach(t => answers.push(t.value));
-
-  let filled = answers.filter(a => a.length > 30).length;
-  let score = Math.round((filled / answers.length) * 100);
-
-  let level = "Junior";
-  if (score > 40) level = "Mid";
-  if (score > 70) level = "Senior";
-  if (score > 85) level = "Lead";
-
-  let result = {
-    name,
-    score,
-    level,
-    answers
-  };
-
-  let blob = new Blob([JSON.stringify(result, null, 2)], {type:"application/json"});
-  let url = URL.createObjectURL(blob);
-
-  let a = document.createElement("a");
-  a.href = url;
-  a.download = name + "-devops-assessment.json";
-  a.click();
-
-  document.getElementById("result").innerHTML =
-    "Score: " + score + "% | Level: " + level + "<br>Result downloaded.";
+ document.getElementById("result").innerHTML=
+ "Score: "+score+"/6<br>Level: "+level;
 }
 
 </script>
